@@ -1,0 +1,119 @@
+mainScreen:
+
+
+<mainScreen>:
+    redSlider:   red
+    greenSlider: green
+    blueSlider : blue
+    serialPorts: spinner
+
+
+    orientation:"vertical"
+
+#    spaccing: 10
+
+    Spinner:
+        id:spinner
+
+        text:"Select the serial port"
+        values:["1",'2','3','5']
+
+        size_hint_y: .05
+        size_hint_x: .8
+        pos_hint:{'center_x': 0.5}
+
+        on_press: root.searchArduino()
+        on_text: root.connectArduino()
+
+
+    MDBoxLayout:
+
+
+
+#----------------------------------------------------------------------
+
+        BoxLayout:
+            orientation:'vertical'
+            MDSlider:
+                id:red
+                orientation:"vertical"
+                color: (1,0,0,1)
+                on_value: root.sendArduino('r', int(self.value))
+                max: 255
+                disabled: True
+                hint:False
+
+
+            MDLabel:
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: (1,0,0,1)
+                text: "R"
+                size_hint_y: .1
+
+#----------------------------------------------------------------------
+
+        BoxLayout:
+            orientation:'vertical'
+            MDSlider:
+                id:green
+                orientation:"vertical"
+                color: (0,1,0,1)
+                on_value: root.sendArduino('g', int(self.value))
+                max: 255
+                disabled: True
+                hint:False
+
+
+            MDLabel:
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: (0,1,0,1)
+                text: "G"
+                size_hint_y: .1
+
+#----------------------------------------------------------------------
+
+        BoxLayout:
+            orientation:'vertical'
+            MDSlider:
+                id:blue
+                orientation:"vertical"
+                color: (0,0,1,1)
+                on_value: root.sendArduino('b', int(self.value))
+                max: 255
+                disabled: True
+                hint:False
+
+
+            MDLabel:
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: (0,0,1,1)
+                text: "B"
+                size_hint_y: .1
+
+
+<ColorSlider@BoxLayout>:
+    orientation:"vertical"
+    text:"black"
+    color: 0,0,0,1
+    disable:False
+    max:100
+    func: lambda x: print(x)
+
+    MDSlider:
+        orientation:"vertical"
+        color: root.color
+        on_value: root.func("qqq")
+        max: root.max
+        disabled: root.disable
+        hint:False
+
+
+    MDLabel:
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: root.color
+        text: root.text
+        size_hint_y: .1
